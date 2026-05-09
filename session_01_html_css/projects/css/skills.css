@@ -1,0 +1,40 @@
+.skills-section {
+    padding: 80px 0;
+    background-color: #f8fafc; /* Màu nền xám nhạt phân cách với About */
+}
+
+.skills-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.skill-bar {
+    background-color: #e2e8f0;
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    height: 100%;
+    width: 0; /* Bắt đầu từ 0 để chạy animation */
+    border-radius: 10px;
+    transition: width 1s ease-out; /* Hiệu ứng chuyển động mượt 1s */
+}
