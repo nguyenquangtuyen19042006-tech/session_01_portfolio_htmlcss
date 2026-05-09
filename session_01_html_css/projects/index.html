@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,23 +13,18 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/skills.css">
+    <link rel="stylesheet" href="css/portfolio.css">
 </head>
+
 <body>
 
     <header>
 
         <div class="logo">YourName</div>
 
-        <input
-            type="checkbox"
-            id="menu-toggle"
-            class="menu-toggle"
-        >
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-        <label
-            for="menu-toggle"
-            class="hamburger"
-        >
+        <label for="menu-toggle" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
@@ -56,10 +52,7 @@
                 Problem Solver
             </p>
 
-            <a
-                href="#portfolio"
-                class="cta-button"
-            >
+            <a href="#portfolio" class="cta-button">
                 View My Work
             </a>
 
@@ -72,8 +65,11 @@
                     </div>
                     <div class="about-content">
                         <h2>About Me</h2>
-                        <p class="lead">I'm a passionate developer with 3 years of experience building web applications that make a difference.</p>
-                        <p>Specialized in Frontend development with React and Vue. Also experienced in Backend with Nodejs and Python. I believe in clean code, user-centered design, and continuous learning.</p>
+                        <p class="lead">I'm a passionate developer with 3 years of experience building web applications
+                            that make a difference.</p>
+                        <p>Specialized in Frontend development with React and Vue. Also experienced in Backend with
+                            Nodejs and Python. I believe in clean code, user-centered design, and continuous learning.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -82,7 +78,7 @@
             <div class="container">
                 <h2 class="section-title">My Skills</h2>
                 <div class="skills-grid">
-                    
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">HTML5</span>
@@ -92,7 +88,7 @@
                             <div class="skill-progress" data-width="95%"></div>
                         </div>
                     </div>
-        
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">CSS3</span>
@@ -102,7 +98,7 @@
                             <div class="skill-progress" data-width="90%"></div>
                         </div>
                     </div>
-        
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">JavaScript</span>
@@ -112,7 +108,7 @@
                             <div class="skill-progress" data-width="85%"></div>
                         </div>
                     </div>
-        
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">React</span>
@@ -122,10 +118,46 @@
                             <div class="skill-progress" data-width="80%"></div>
                         </div>
                     </div>
-        
+
                 </div>
             </div>
         </section>
+        <section id="portfolio" class="portfolio-section">
+            <div class="container">
+                <h2 class="section-title">My Portfolio</h2>
+                
+                <div class="portfolio-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Web</button>
+                    <button class="filter-btn">Mobile</button>
+                    <button class="filter-btn">Design</button>
+                </div>
+        
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="web">
+                        <img src="https://via.placeholder.com/400x300/5b5cf0/ffffff?text=Web+Project+1" alt="Web Project 1">
+                    </div>
+                    <div class="portfolio-item" data-category="web">
+                        <img src="https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Web+Project+2" alt="Web Project 2">
+                    </div>
+                    <div class="portfolio-item" data-category="web">
+                        <img src="https://via.placeholder.com/400x300/1e293b/ffffff?text=Web+Project+3" alt="Web Project 3">
+                    </div>
+                    <div class="portfolio-item" data-category="mobile">
+                        <img src="https://via.placeholder.com/400x300/fbbf24/ffffff?text=Mobile+App+1" alt="Mobile App 1">
+                    </div>
+                    <div class="portfolio-item" data-category="mobile">
+                        <img src="https://via.placeholder.com/400x300/5b5cf0/ffffff?text=Mobile+App+2" alt="Mobile App 2">
+                    </div>
+                    <div class="portfolio-item" data-category="design">
+                        <img src="https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Design+Project" alt="Design Project">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
     </main>
     <script>
         // Sử dụng Intersection Observer để biết khi nào người dùng cuộn tới phần Skills
@@ -138,11 +170,12 @@
                 }
             });
         });
-    
+
         // Theo dõi tất cả các thanh progress
         document.querySelectorAll('.skill-progress').forEach(bar => {
             observer.observe(bar);
         });
     </script>
 </body>
+
 </html>
