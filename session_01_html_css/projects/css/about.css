@@ -44,4 +44,16 @@
     line-height: 1.7;
     color: #475569;
 }
+/* Responsive cho About */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stacked layout */
+        text-align: center;
+        gap: 2rem;
+    }
 
+    .about-image img {
+        width: 200px; /* Thu nhỏ avatar trên mobile */
+        height: 200px;
+    }
+}
