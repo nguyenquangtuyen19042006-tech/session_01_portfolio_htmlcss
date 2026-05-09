@@ -1,0 +1,12 @@
+:root {
+    --primary-color: #5b5cf0;
+    --secondary-color: #8b5cf6;
+    --accent-color: #fbbf24;
+
+    --white: #ffffff;
+    --dark: #1e293b;
+
+    --header-height: 80px;
+
+    --font-main: Arial, sans-serif;
+}
