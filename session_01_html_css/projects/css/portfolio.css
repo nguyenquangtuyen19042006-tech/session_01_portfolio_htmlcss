@@ -97,3 +97,56 @@
 .portfolio-item:hover .portfolio-overlay p {
     transform: translateY(0);
 }
+/* Sửa lại cho thẻ a chiếm toàn bộ diện tích item */
+.portfolio-item .lightbox-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ngăn overlay chặn click chuột của thẻ a */
+.portfolio-overlay {
+    pointer-events: none; 
+}
+
+/* Lightbox mặc định bị ẩn */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+/* Mấu chốt của CSS-only lightbox: Kích hoạt khi có ID trùng với URL hash */
+.lightbox:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: var(--white);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-color);
+}
