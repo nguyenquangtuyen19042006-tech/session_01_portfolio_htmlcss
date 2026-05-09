@@ -29,3 +29,19 @@ img {
     margin: 0 auto;
     padding: 0 20px;
 }
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột trên mobile */
+        gap: 40px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
