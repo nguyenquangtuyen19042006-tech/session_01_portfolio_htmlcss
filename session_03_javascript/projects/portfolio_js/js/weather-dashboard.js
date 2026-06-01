@@ -21,3 +21,25 @@ async function fetchForecast(city) {
         console.error(error);
     }
 }
+
+// [FEATURE] Lưu lịch sử tìm kiếm vào localStorage
+function saveToHistory(city) {
+    let history = JSON.parse(localStorage.getItem('weatherHistory')) || [];
+    
+    // Nếu thành phố chưa có trong lịch sử thì thêm vào
+    if (!history.includes(city)) {
+        history.unshift(city); // Thêm vào đầu mảng
+        if (history.length > 5) history.pop(); // Giới hạn 5 thành phố
+        localStorage.setItem('weatherHistory', JSON.stringify(history));
+        renderHistory();
+    }
+}
+
+function renderHistory() {
+    const historyList = document.getElementById('historyList');
+    const history = JSON.parse(localStorage.getItem('weatherHistory')) || [];
+    historyList.innerHTML = history.map(city => `<li>${city}</li>`).join('');
+}
+
+// Gọi renderHistory khi load trang
+renderHistory();
