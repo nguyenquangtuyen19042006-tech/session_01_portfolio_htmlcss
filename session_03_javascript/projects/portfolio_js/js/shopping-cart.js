@@ -10,3 +10,9 @@ function addToCart(product) {
     }
     saveCart();
 }
+
+// [FEATURE] Render giỏ hàng và tính tổng tiền
+function renderCart() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Code render HTML tại đây...
+}
