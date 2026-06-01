@@ -41,7 +41,25 @@
         <button type="submit">Send Message</button>
     </form>
     <div id="success-message" hidden>Message sent successfully!</div>
-
+    <section id="todo-section" class="todo-container">
+        <h2>Quản lý công việc</h2>
+        
+        <div class="input-group">
+            <input type="text" id="todoInput" placeholder="Nhập việc cần làm...">
+            <button id="addBtn">Thêm</button>
+        </div>
+    
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">Tất cả</button>
+            <button class="filter-btn" data-filter="active">Chưa xong</button>
+            <button class="filter-btn" data-filter="completed">Đã xong</button>
+        </div>
+    
+        <ul id="todoList">
+            </ul>
+    </section>
+    
+    <script src="js/todo-app.js"></script>
     <script src="js/portfolio-filter.js"></script>
     <script src="js/lightbox.js"></script>
     <script src="js/form-validation.js"></script>
