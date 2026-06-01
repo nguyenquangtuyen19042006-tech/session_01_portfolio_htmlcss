@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <title>Portfolio của tôi</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+
+    <button id="theme-toggle" class="theme-toggle">
+        <span class="theme-icon light-icon">☀️</span>
+        <span class="theme-icon dark-icon">🌙</span>
+    </button>
 
     <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -15,46 +19,32 @@
     </div>
 
     <div class="portfolio-grid">
-        <div class="portfolio-item" data-category="web">Web Project 1</div>
-        <div class="portfolio-item" data-category="mobile">Mobile Project 1</div>
+        <div class="portfolio-item" data-category="web">
+            <img src="project1.jpg" alt="Project 1" data-full="project1-full.jpg" class="lightbox-trigger">
+            <h5>Web Project 1</h5>
+        </div>
     </div>
 
     <div id="lightbox" class="lightbox-overlay">
         <button class="lightbox-close">&times;</button>
-        <button class="lightbox-prev">&#10094;</button>
-        <button class="lightbox-next">&#10095;</button>
-        <img id="lightbox-img" class="lightbox-image" src="" alt="Portfolio Image">
-        <div class="lightbox-caption">
-            <h3 id="lightbox-title">Project Title</h3>
-            <p id="lightbox-desc">Project description</p>
-        </div>
+        <img id="lightbox-img" class="lightbox-image" src="" alt="Full view">
     </div>
-    <form id="contact-form" class="contact-form">
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
-            <span class="error-message" id="name-error"></span>
-        </div>
 
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required>
-            <span class="error-message" id="email-error"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <span class="error-message" id="message-error"></span>
-        </div>
-
-        <button type="submit" class="submit-btn">Send Message</button>
+    <form id="contact-form">
+        <input type="text" id="name" placeholder="Name" required>
+        <span class="error-message" id="name-error"></span>
+        
+        <input type="email" id="email" placeholder="Email" required>
+        <span class="error-message" id="email-error"></span>
+        
+        <textarea id="message" placeholder="Message"></textarea>
+        <button type="submit">Send Message</button>
     </form>
+    <div id="success-message" hidden>Message sent successfully!</div>
 
-    <div id="success-message" class="success-message" hidden>
-        Message sent successfully!
-    </div>
     <script src="js/portfolio-filter.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script src="js/theme-toggle.js"></script>
 </body>
-
 </html>
