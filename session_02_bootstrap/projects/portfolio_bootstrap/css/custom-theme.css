@@ -21,3 +21,26 @@
 .gap-4 { 
     gap: 2rem !important; 
 }
+:root {
+    /* Typography */
+    --bs-body-font-family: 'Inter', system-ui, sans-serif;
+    
+    /* Border radius */
+    --bs-border-radius: 0.5rem;
+    --bs-border-radius-lg: 1rem;
+}
+
+/* Card & Form styles */
+.card {
+    border-radius: 16px !important;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-control {
+    border-radius: 10px !important;
+}
+
+body {
+    background-color: #f8fafc; /* Slate 50 */
+}
