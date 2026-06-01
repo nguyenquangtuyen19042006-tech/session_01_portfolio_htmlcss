@@ -17,3 +17,11 @@ function renderTable() {
     `).join('');
 }
 renderTable();
+
+// [FEATURE] Search function
+function searchStudent(keyword) {
+    const filtered = sinhVien.filter(sv => 
+        sv.hoTen.toLowerCase().includes(keyword.toLowerCase())
+    );
+    console.log("Kết quả tìm kiếm:", filtered);
+}
