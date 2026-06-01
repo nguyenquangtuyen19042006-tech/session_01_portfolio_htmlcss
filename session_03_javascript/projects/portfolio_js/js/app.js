@@ -19,3 +19,14 @@ todoList.addEventListener('click', (e) => {
         toggleTodo(id);
     }
 });
+
+
+// [FEATURE] Lưu và lấy dữ liệu từ localStorage
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+    render();
+}
+
+// Khởi tạo khi load trang
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
+render();
