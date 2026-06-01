@@ -12,3 +12,13 @@ nameInput.addEventListener('input', () => {
         nameInput.classList.remove('error');
     }
 });
+
+// [FEATURE] Handle form submit
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (isValid()) {
+        successMessage.hidden = false;
+        form.reset();
+        setTimeout(() => successMessage.hidden = true, 3000);
+    }
+});
