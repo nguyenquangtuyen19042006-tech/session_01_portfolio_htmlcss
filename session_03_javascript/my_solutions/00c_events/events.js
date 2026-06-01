@@ -9,3 +9,10 @@ const input = document.getElementById('userInput');
 input.addEventListener('input', (e) => {
     console.log("Đang nhập:", e.target.value);
 });
+
+// [FEATURE] Form event
+const form = document.getElementById('myForm');
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Ngăn load lại trang
+    console.log("Form đã được gửi");
+});
