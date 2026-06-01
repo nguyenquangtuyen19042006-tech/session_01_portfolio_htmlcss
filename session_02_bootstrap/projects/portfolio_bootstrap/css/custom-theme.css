@@ -13,3 +13,11 @@
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
 }
+.py-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.gap-4 { 
+    gap: 2rem !important; 
+}
