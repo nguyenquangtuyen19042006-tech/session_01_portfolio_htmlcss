@@ -15,3 +15,13 @@ document.addEventListener('click', (e) => {
 document.querySelector('.lightbox-close').addEventListener('click', () => {
     lightbox.classList.remove('active');
 });
+
+// [FEATURE] Keyboard navigation (Escape)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+});
+
+// [FEATURE] Click overlay to close
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.classList.remove('active');
+});
