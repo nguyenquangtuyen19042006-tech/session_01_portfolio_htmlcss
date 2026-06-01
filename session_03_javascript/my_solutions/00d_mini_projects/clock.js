@@ -5,3 +5,6 @@ function updateClock() {
     document.getElementById('clock').textContent = timeString;
 }
 updateClock();
+
+// [FEATURE] Update clock every second
+setInterval(updateClock, 1000);
