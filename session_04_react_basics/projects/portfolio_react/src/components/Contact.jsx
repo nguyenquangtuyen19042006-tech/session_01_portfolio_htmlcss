@@ -3,32 +3,68 @@ import { useState } from 'react';
 import styles from './Contact.module.css';
 
 function Contact() {
-    // 1. Quản lý chung các trường dữ liệu bằng 1 Object duy nhất
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     });
 
-    // Quản lý lỗi cục bộ cho từng ô
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    // 2. Hàm bắt sự kiện thay đổi dữ liệu của toàn bộ input/textarea
     const handleChange = (e) => {
         const { name, value } = e.target;
-        
-        setFormData(prev => ({
-            ...prev,
-            [name]: value // Cập nhật động theo thuộc tính name của thẻ
-        }));
-
-        // Xóa lỗi ngay khi người dùng bắt đầu sửa sai/gõ tiếp tục
+        setFormData(prev => ({ ...prev, [name]: value }));
         if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ''
-            }));
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        }
+        if (isSubmitted) setIsSubmitted(false);
+    };
+
+    // 1. Logic kiểm tra tính đúng đắn của dữ liệu đầu vào
+    const validateForm = () => {
+        const newErrors = {};
+
+        // Kiểm tra tên (Yêu cầu không trống và tối thiểu 2 ký tự)
+        if (!formData.name.trim()) {
+            newErrors.name = 'Name is required';
+        } else if (formData.name.trim().length < 2) {
+            newErrors.name = 'Name must be at least 2 characters';
+        }
+
+        // Kiểm tra định dạng Email theo Regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!emailRegex.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+
+        // Kiểm tra nội dung tin nhắn
+        if (!formData.message.trim()) {
+            newErrors.message = 'Message cannot be empty';
+        }
+
+        setErrors(newErrors);
+        // Trả về true nếu object lỗi rỗng (Form hoàn toàn hợp lệ)
+        return Object.keys(newErrors).length === 0;
+    };
+
+    // 2. Hàm xử lý nộp form
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định làm tải lại trang của thẻ form
+
+        if (validateForm()) {
+            console.log('Form Submitted successfully:', formData);
+            setIsSubmitted(true);
+            
+            // Khôi phục form về trạng thái trống ban đầu sau khi thành công
+            setFormData({
+                name: '',
+                email: '',
+                message: ''
+            });
+            setErrors({});
         }
     };
 
@@ -44,7 +80,8 @@ function Contact() {
                     </div>
                 )}
 
-                <form>
+                {/* Gắn sự kiện onSubmit trực tiếp vào thẻ form */}
+                <form onSubmit={handleSubmit}>
                     <div className={styles['form-group']}>
                         <label htmlFor="name">Name</label>
                         <input
@@ -56,12 +93,13 @@ function Contact() {
                             onChange={handleChange}
                             placeholder="Nhập họ và tên..."
                         />
+                        {errors.name && <span className={styles['error-msg']}>{errors.name}</span>}
                     </div>
 
                     <div className={styles['form-group']}>
                         <label htmlFor="email">Email</label>
                         <input
-                            type="email"
+                            type="text"
                             id="email"
                             name="email"
                             className={`${styles['form-control']} ${errors.email ? styles.error : formData.email ? styles.valid : ''}`}
@@ -69,6 +107,7 @@ function Contact() {
                             onChange={handleChange}
                             placeholder="example@gmail.com"
                         />
+                        {errors.email && <span className={styles['error-msg']}>{errors.email}</span>}
                     </div>
 
                     <div className={styles['form-group']}>
@@ -82,9 +121,10 @@ function Contact() {
                             onChange={handleChange}
                             placeholder="Nội dung lời nhắn..."
                         ></textarea>
+                        {errors.message && <span className={styles['error-msg']}>{errors.message}</span>}
                     </div>
 
-                    <button type="button" className={styles['submit-btn']}>
+                    <button type="submit" className={styles['submit-btn']}>
                         Send Message
                     </button>
                 </form>
