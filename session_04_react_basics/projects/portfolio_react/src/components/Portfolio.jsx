@@ -1,20 +1,33 @@
 // src/components/Portfolio.jsx
-function Portfolio({ projects }) {
-  return (
-      <section id="portfolio" className="container">
-          <h2>Featured Projects</h2>
-          <div className="project-grid" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
-              {projects.map((project) => (
-                  <div key={project.id} className="project-card" style={{ background: '#fff', padding: '1rem', borderRadius: '6px', width: 'calc(50% - 0.75rem)' }}>
-                      <img src={project.image} alt={project.title} style={{ width: '100%', borderRadius: '4px' }} />
-                      <h3 style={{ margin: '0.5rem 0' }}>{project.title}</h3>
-                      <p style={{ fontSize: '0.9rem', color: '#64748b' }}>{project.category.toUpperCase()}</p>
-                      <p>{project.description}</p>
-                  </div>
-              ))}
-          </div>
-      </section>
-  );
+import { useState } from 'react';
+import { projects as initialProjects } from '../data/projects';
+import ProjectCard from './ProjectCard';
+import styles from './Portfolio.module.css';
+
+function Portfolio() {
+    // Chuyển đổi từ nhận props tĩnh sang quản lý trạng thái bằng useState nội bộ
+    const [items] = useState(initialProjects);
+
+    return (
+        <section id="portfolio" className="container" style={{ padding: '5rem 0' }}>
+            <h2 style={{ textAlign: 'center', color: '#1e293b', fontSize: '2rem' }}>Featured Projects</h2>
+            <p style={{ textAlign: 'center', color: '#64748b', marginBottom: '2rem' }}>Danh sách dự án được quản lý bằng State</p>
+            
+            {/* Vòng lặp hiển thị danh sách qua phương thức .map() */}
+            <div className={styles['portfolio-grid']}>
+                {items.map((project) => (
+                    <ProjectCard
+                        key={project.id} // Unique key bắt buộc cho Virtual DOM
+                        title={project.title}
+                        category={project.category}
+                        image={project.image}
+                        description={project.description}
+                        tags={project.tags}
+                    />
+                ))}
+            </div>
+        </section>
+    );
 }
 
 export default Portfolio;
