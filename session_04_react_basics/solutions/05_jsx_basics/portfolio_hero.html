@@ -3,20 +3,42 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Portfolio — Hero & Skills (React CDN)</title>
+    <title>Portfolio — Full JSX Components (React CDN)</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 800px; margin: 3rem auto; padding: 0 1rem; color: #1e293b; background-color: #f8fafc; }
-        .hero { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 3rem; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-align: center; margin-bottom: 2rem; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 3rem auto; padding: 0 1rem; color: #1e293b; background-color: #f8fafc; }
+        .hero { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 3rem; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-align: center; margin-bottom: 3rem; }
         .hero h1 { margin: 0 0 0.5rem 0; font-size: 2.5rem; font-weight: 800; }
         .hero h2 { margin: 0 0 1rem 0; font-size: 1.25rem; font-weight: 400; opacity: 0.9; }
         .hero p { max-width: 600px; margin: 0 auto 1.5rem auto; opacity: 0.85; line-height: 1.6; }
+        
         .skills-container { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
-        .skill-badge { padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 20px; font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease; }
-        .skill-badge:hover { background-color: white; color: #4f46e5; transform: translateY(-2px); }
+        .skill-badge { padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+        
+        /* Styles cho Phần B - Projects Grid */
+        .section-title { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; color: #0f172a; position: relative; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .project-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; position: relative; display: flex; flex-direction: column; }
+        .project-image { width: 100%; height: 180px; object-fit: cover; background-color: #cbd5e1; }
+        .project-info { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .project-title { margin: 0; font-size: 1.2rem; color: #1e293b; font-weight: 700; }
+        .project-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; margin: 0 0 1rem 0; flex-grow: 1; }
+        
+        /* Định dạng nhãn phân loại (CategoryBadge) */
+        .category { padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: capitalize; }
+        .cat-web { background-color: #e0f2fe; color: #0369a1; }
+        .cat-mobile { background-color: #f0fdf4; color: #15803d; }
+        .cat-design { background-color: #faf5ff; color: #6b21a8; }
+        
+        /* Huy hiệu Nổi bật (Conditional Badge) */
+        .featured-badge { position: absolute; top: 0.75rem; left: 0.75rem; background-color: #fef3c7; color: #d97706; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        .card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .card-tag { font-size: 0.75rem; background-color: #f1f5f9; color: #475569; padding: 0.2rem 0.5rem; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -24,40 +46,122 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // 1. Component con nhận props 'name' để hiển thị động từng Badge
+        // --- PHẦN A COMPONENTS ---
         function SkillBadge({ name }) {
             return <span className="skill-badge">{name}</span>;
         }
 
-        // 2. Component chính quản lý giao diện Hero Section
         function PortfolioHero() {
-            const myName = "Nguyễn Quang Tuyến";
-            const myRole = "Full-Stack Developer Student @ TLU";
-            const myBio = "Đam mê xây dựng ứng dụng web chuẩn cấu trúc dữ liệu, tối ưu hóa hệ thống cơ sở dữ liệu và thiết kế mạng máy tính nâng cao.";
-            
-            // Mảng dữ liệu chứa danh sách kỹ năng
             const skills = ["HTML5/CSS3", "Semantic Web", "ReactJS", "Python", "SQL Server", "Network Subnetting"];
-
             return (
                 <section className="hero">
-                    <h1>{myName}</h1>
-                    <h2>{myRole}</h2>
-                    <p>{myBio}</p>
-                    
+                    <h1>Nguyễn Quang Tuyến</h1>
+                    <h2>Full-Stack Developer Student @ TLU</h2>
+                    <p>Đam mê xây dựng ứng dụng web chuẩn cấu trúc dữ liệu, tối ưu hóa hệ thống cơ sở dữ liệu và thiết kế mạng máy tính nâng cao.</p>
                     <h3>My Tech Stack</h3>
                     <div className="skills-container">
-                        {/* Render danh sách kỹ năng bằng hàm .map() và truyền prop kèm unique key */}
-                        {skills.map((skill, index) => (
-                            <SkillBadge key={index} name={skill} />
-                        ))}
+                        {skills.map((skill, index) => <SkillBadge key={index} name={skill} />)}
                     </div>
                 </section>
             );
         }
 
-        // Render ứng dụng vào thẻ #root
+        // --- PHẦN B COMPONENTS (YÊU CẦU ĐỀ BÀI) ---
+        // 1. Component phân loại danh mục thông minh
+        function CategoryBadge({ category }) {
+            // Xác định class CSS tương ứng theo giá trị của category
+            const catClass = category === 'web' ? 'cat-web'
+                           : category === 'mobile' ? 'cat-mobile' : 'cat-design';
+            
+            // Chuẩn hóa chữ cái đầu thành chữ hoa
+            const label = category.charAt(0).toUpperCase() + category.slice(1);
+            
+            return <span className={`category ${catClass}`}>{label}</span>;
+        }
+
+        // 2. Component hiển thị thông tin từng Card dự án
+        function ProjectCard({ title, category, image, description, tags, featured }) {
+            return (
+                <div className="project-card">
+                    {/* Render có điều kiện bằng toán tử &&: Chỉ hiển thị nếu thuộc tính featured bằng true */}
+                    {featured && <div className="featured-badge">⭐ Nổi bật</div>}
+                    
+                    <img src={image} alt={title} className="project-image" />
+                    
+                    <div className="project-info">
+                        <div className="project-header">
+                            <h3 className="project-title">{title}</h3>
+                            <CategoryBadge category={category} />
+                        </div>
+                        <p className="project-desc">{description}</p>
+                        <div className="card-tags">
+                            {tags.map(tag => <span key={tag} className="card-tag">{tag}</span>)}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // 3. Component Tổng hợp toàn bộ trang giao diện Portfolio
+        function App() {
+            // Mảng dữ liệu giả lập danh sách dự án phục vụ hiển thị
+            const projectsData = [
+                {
+                    id: 1,
+                    title: "Hệ thống Quản lý Siêu thị",
+                    category: "web",
+                    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=500",
+                    description: "Phát triển phân hệ theo dõi lịch sử nhập hàng và phân loại nhà cung cấp chuẩn mô hình UML.",
+                    tags: ["C#", "SQL Server", "ADO.NET"],
+                    featured: true
+                },
+                {
+                    id: 2,
+                    title: "Ứng dụng ShopTLU",
+                    category: "mobile",
+                    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500",
+                    description: "Ứng dụng di động mua sắm đồng phục và quà lưu niệm mang logo thương hiệu trường Đại học Thủy Lợi.",
+                    tags: ["React Native", "Firebase"],
+                    featured: false
+                },
+                {
+                    id: 3,
+                    title: "Giao diện E-Commerce Mockup",
+                    category: "design",
+                    image: "https://images.unsplash.com/photo-1561070791-26c113006238?w=500",
+                    description: "Bản thiết kế UI/UX tối ưu hóa luồng tương tác và phân rã các khối Semantic HTML chuẩn SEO.",
+                    tags: ["Figma", "UI Design"],
+                    featured: true
+                }
+            ];
+
+            return (
+                <div>
+                    {/* Render phần Hero Section từ phần A */}
+                    <PortfolioHero />
+                    
+                    {/* Render phần danh sách dự án từ phần B */}
+                    <h2 className="section-title">Featured Projects Grid</h2>
+                    <div className="project-grid">
+                        {projectsData.map(project => (
+                            <ProjectCard 
+                                key={project.id}
+                                title={project.title}
+                                category={project.category}
+                                image={project.image}
+                                description={project.description}
+                                tags={project.tags}
+                                featured={project.featured}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Thực hiện render component App tổng vào DOM
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<PortfolioHero />);
+        root.render(<App />);
     </script>
 </body>
 </html>
