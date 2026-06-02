@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Portfolio — Hero & Skills (React CDN)</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 800px; margin: 3rem auto; padding: 0 1rem; color: #1e293b; background-color: #f8fafc; }
+        .hero { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 3rem; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-align: center; margin-bottom: 2rem; }
+        .hero h1 { margin: 0 0 0.5rem 0; font-size: 2.5rem; font-weight: 800; }
+        .hero h2 { margin: 0 0 1rem 0; font-size: 1.25rem; font-weight: 400; opacity: 0.9; }
+        .hero p { max-width: 600px; margin: 0 auto 1.5rem auto; opacity: 0.85; line-height: 1.6; }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
+        .skill-badge { padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 20px; font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease; }
+        .skill-badge:hover { background-color: white; color: #4f46e5; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 1. Component con nhận props 'name' để hiển thị động từng Badge
+        function SkillBadge({ name }) {
+            return <span className="skill-badge">{name}</span>;
+        }
+
+        // 2. Component chính quản lý giao diện Hero Section
+        function PortfolioHero() {
+            const myName = "Nguyễn Quang Tuyến";
+            const myRole = "Full-Stack Developer Student @ TLU";
+            const myBio = "Đam mê xây dựng ứng dụng web chuẩn cấu trúc dữ liệu, tối ưu hóa hệ thống cơ sở dữ liệu và thiết kế mạng máy tính nâng cao.";
+            
+            // Mảng dữ liệu chứa danh sách kỹ năng
+            const skills = ["HTML5/CSS3", "Semantic Web", "ReactJS", "Python", "SQL Server", "Network Subnetting"];
+
+            return (
+                <section className="hero">
+                    <h1>{myName}</h1>
+                    <h2>{myRole}</h2>
+                    <p>{myBio}</p>
+                    
+                    <h3>My Tech Stack</h3>
+                    <div className="skills-container">
+                        {/* Render danh sách kỹ năng bằng hàm .map() và truyền prop kèm unique key */}
+                        {skills.map((skill, index) => (
+                            <SkillBadge key={index} name={skill} />
+                        ))}
+                    </div>
+                </section>
+            );
+        }
+
+        // Render ứng dụng vào thẻ #root
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PortfolioHero />);
+    </script>
+</body>
+</html>
