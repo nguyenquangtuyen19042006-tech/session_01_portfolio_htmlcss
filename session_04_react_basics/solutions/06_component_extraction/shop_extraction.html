@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ShopVN — Component Extraction (React CDN)</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        :root { --primary: #0f172a; --accent: #2563eb; --bg: #f8fafc; --text: #334155; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: var(--text); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        /* Navbar Style */
+        nav { background-color: var(--primary); color: white; padding: 1rem 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links a { color: #cbd5e1; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: white; }
+        
+        /* Hero Style */
+        .hero-section { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; text-align: center; padding: 4rem 1rem; }
+        .hero-section h1 { font-size: 2.8rem; margin: 0 0 1rem 0; }
+        .hero-section p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem; }
+        .btn-main { background-color: var(--accent); color: white; padding: 0.75rem 2rem; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-main:hover { background-color: #1d4ed8; }
+        
+        /* Product Grid & Card Styles */
+        .grid-section { padding: 4rem 0; }
+        .grid-title { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: var(--primary); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: transform 0.3s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { width: 100%; height: 240px; object-fit: cover; }
+        .card-info { padding: 1.25rem; }
+        .card-info h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--primary); }
+        .card-info .price { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem; }
+        .btn-add { width: 100%; background-color: #f1f5f9; color: var(--primary); border: none; padding: 0.6rem 0; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-add:hover { background-color: var(--accent); color: white; }
+        
+        /* Footer Style */
+        footer { background-color: #0f172a; color: #64748b; text-align: center; padding: 2rem 0; border-top: 1px solid #1e293b; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 1. Component Navbar nhận vào logo text và mảng links
+        function Navbar({ logo, links }) {
+            return (
+                <nav>
+                    <div className="container nav-container">
+                        <a href="/" className="logo">{logo}</a>
+                        <div className="nav-links">
+                            {links.map((link, index) => (
+                                <a key={index} href={link.url}>{link.label}</a>
+                            ))}
+                        </div>
+                    </div>
+                </nav>
+            );
+        }
+
+        // 2. Component Hero quản lý banner quảng cáo đầu trang
+        function Hero({ title, subtitle, buttonText }) {
+            return (
+                <section className="hero-section">
+                    <div className="container">
+                        <h1>{title}</h1>
+                        <p>{subtitle}</p>
+                        <button className="btn-main">{buttonText}</button>
+                    </div>
+                </section>
+            );
+        }
+
+        // 3. Component Con: ProductCard hiển thị từng sản phẩm riêng biệt
+        function ProductCard({ image, name, price }) {
+            return (
+                <div className="product-card">
+                    <img src={image} alt={name} />
+                    <div className="card-info">
+                        <h3>{name}</h3>
+                        <p className="price">{price}</p>
+                        <button className="btn-add">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            );
+        }
+
+        // 4. Component Cha: ProductGrid bọc danh sách và thực hiện vòng lặp render
+        function ProductGrid({ title, products }) {
+            return (
+                <section className="grid-section container">
+                    <h2 className="grid-title">{title}</h2>
+                    <div className="products-grid">
+                        {products.map((product) => (
+                            <ProductCard 
+                                key={product.id}
+                                image={product.image}
+                                name={product.name}
+                                price={product.price}
+                            />
+                        ))}
+                    </div>
+                </section>
+            );
+        }
+
+        // 5. Component Footer hiển thị thông tin bản quyền cuối trang
+        function Footer({ text }) {
+            return (
+                <footer>
+                    <div className="container">
+                        <p>{text}</p>
+                    </div>
+                </footer>
+            );
+        }
+
+        // 6. Component Gốc App điều phối luồng dữ liệu trung tâm
+        function App() {
+            // Dữ liệu Menu Điều hướng
+            const navLinks = [
+                { label: "Trang chủ", url: "/" },
+                { label: "Sản phẩm", url: "#products" },
+                { label: "Giới thiệu", url: "#about" },
+                { label: "Liên hệ", url: "#contact" }
+            ];
+
+            // Dữ liệu Danh sách Sản phẩm mẫu
+            const products = [
+                {
+                    id: 1,
+                    name: "Áo Khoác Đồng Phục TLU",
+                    price: "250.000 đ",
+                    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"
+                },
+                {
+                    id: 2,
+                    name: "Balo Học Sinh Thời Trang",
+                    price: "320.000 đ",
+                    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+                },
+                {
+                    id: 3,
+                    name: "Mũ Bảo Hiểm Logo Trường",
+                    price: "150.000 đ",
+                    image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?w=500"
+                }
+            ];
+
+            return (
+                <div>
+                    {/* Truyền dữ liệu qua các lớp Props flow rõ ràng */}
+                    <Navbar logo="ShopVN" links={navLinks} />
+                    <Hero 
+                        title="Chào mừng đến với ShopVN" 
+                        subtitle="Nơi cung cấp các sản phẩm và phụ kiện học đường uy tín, chất lượng cao." 
+                        buttonText="Mua ngay" 
+                    />
+                    <ProductGrid title="Sản phẩm nổi bật" products={products} />
+                    <Footer text="© 2026 ShopVN. All rights reserved. Thiết kế cấu trúc bởi Nguyễn Quang Tuyến." />
+                </div>
+            );
+        }
+
+        // Render ứng dụng vào thẻ #root
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
