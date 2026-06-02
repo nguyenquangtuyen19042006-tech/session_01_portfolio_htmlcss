@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-react",
+  "name": "portfolio_react",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -14,6 +14,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.0"
+    "vite": "^5.2.0"
   }
 }
