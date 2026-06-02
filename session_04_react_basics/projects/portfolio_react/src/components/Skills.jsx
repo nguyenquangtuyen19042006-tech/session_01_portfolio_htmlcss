@@ -1,5 +1,5 @@
 // src/components/Skills.jsx
-function Skills({ skills }) {
+function Skills({ skills  = [] }) {
   return (
       <section id="skills" className="container">
           <h2>My Skills</h2>
